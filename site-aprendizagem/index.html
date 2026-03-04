@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Material de Estudo Digital - Java</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header>
+    <h1>Material de Estudo Digital - Java</h1>
+    <p>Aprendendo Java do básico ao avançado</p>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#basico">Conceitos Básicos</a></li>
+        <li><a href="#repeticao">Repetição</a></li>
+        <li><a href="#poo">POO</a></li>
+        <li><a href="#heranca">Herança</a></li>
+        <li><a href="#colecoes">Coleções</a></li>
+        <li><a href="#projeto">Projeto Integrador</a></li>
+        <li><a href="#avaliacao">Avaliação</a></li>
+    </ul>
+</nav>
+
+<section id="basico">
+    <h2>Conceitos Básicos</h2>
+    <p>
+        Em Java, o primeiro passo é entender variáveis e tipos de dados.
+        Variáveis armazenam informações e possuem um tipo definido.
+    </p>
+
+    <pre><code>
+int idade = 20;
+double altura = 1.75;
+boolean ativo = true;
+String nome = "João";
+    </code></pre>
+
+    <p>
+        Também aprendemos operadores matemáticos (+, -, *, /) e operadores lógicos (&&, ||).
+        Estruturas condicionais como <strong>if/else</strong> permitem tomar decisões:
+    </p>
+
+    <pre><code>
+if (idade >= 18) {
+    System.out.println("Maior de idade");
+} else {
+    System.out.println("Menor de idade");
+}
+    </code></pre>
+</section>
+
+<section id="repeticao">
+    <h2>Estruturas de Repetição</h2>
+    <p>
+        Estruturas de repetição permitem executar blocos de código várias vezes.
+        As principais são: <strong>for</strong>, <strong>while</strong> e <strong>do-while</strong>.
+    </p>
+
+    <pre><code>
+for (int i = 0; i < 5; i++) {
+    System.out.println(i);
+}
+    </code></pre>
+
+    <p>
+        Arrays armazenam múltiplos valores do mesmo tipo:
+    </p>
+
+    <pre><code>
+int[] numeros = {1, 2, 3, 4, 5};
+System.out.println(numeros[0]);
+    </code></pre>
+</section>
+
+<section id="poo">
+    <h2>Programação Orientada a Objetos (POO)</h2>
+    <p>
+        Java é uma linguagem orientada a objetos. Isso significa que organizamos
+        o código em classes e criamos objetos a partir delas.
+    </p>
+
+    <pre><code>
+public class Conta {
+    double saldo;
+
+    void depositar(double valor) {
+        saldo += valor;
+    }
+}
+    </code></pre>
+
+    <p>
+        Encapsulamento protege os dados usando métodos getters e setters.
+    </p>
+</section>
+
+<section id="heranca">
+    <h2>Herança e Polimorfismo</h2>
+    <p>
+        Herança permite que uma classe herde características de outra.
+        Polimorfismo permite comportamentos diferentes para métodos com o mesmo nome.
+    </p>
+
+    <pre><code>
+public class Veiculo {
+    void acelerar() {
+        System.out.println("Acelerando...");
+    }
+}
+
+public class Carro extends Veiculo {
+    void acelerar() {
+        System.out.println("Carro acelerando...");
+    }
+}
+    </code></pre>
+</section>
+
+<section id="colecoes">
+    <h2>Coleções e ArrayList</h2>
+    <p>
+        O ArrayList é uma estrutura dinâmica que permite armazenar múltiplos objetos.
+    </p>
+
+    <pre><code>
+import java.util.ArrayList;
+
+ArrayList<String> nomes = new ArrayList<>();
+nomes.add("Ana");
+nomes.add("Carlos");
+    </code></pre>
+
+    <p>
+        Coleções são muito usadas em sistemas reais para armazenar listas de usuários,
+        produtos, tarefas, entre outros.
+    </p>
+</section>
+
+<section id="projeto">
+    <h2>🛒 Projeto Integrador - Sistema de E-commerce</h2>
+    <p>
+        No projeto integrador aplicamos todos os conceitos aprendidos:
+        classes, objetos, herança, coleções e organização de sistemas.
+    </p>
+
+    <ul>
+        <li>Usuário</li>
+        <li>Produto</li>
+        <li>Carrinho</li>
+        <li>Pedido</li>
+        <li>Pagamento</li>
+    </ul>
+
+    <p>
+        Esse tipo de projeto simula um sistema real e consolida o aprendizado.
+    </p>
+</section>
+
+<section id="avaliacao">
+    
+
+    <form>
+        <h2>Avaliação do Usuário</h2>
+
+        <label>Nome:</label>
+        <input type="text" name="nome" required>
+
+        <label>Nível de conhecimento antes do conteúdo:</label>
+        <select name="nivel">
+            <option>Iniciante</option>
+            <option>Intermediário</option>
+            <option>Avançado</option>
+        </select>
+
+        <p>1) Você compreendeu os conceitos de POO?</p>
+       <label><input type="radio" name="q1"> Sim</label>
+       <label><input type="radio" name="q1"> Parcialmente</label> 
+       <label><input type="radio" name="q1"> Não</label>
+
+        <p>2) O conteúdo está bem organizado?</p>
+        <label><input type="radio" name="q2"> Excelente</label>
+        <label><input type="radio" name="q2"> Bom</label>
+        <label><input type="radio" name="q2"> Regular</label>
+        <label><input type="radio" name="q2"> Ruim</label>
+
+        <label>Comentários:</label>
+        <textarea rows="4"></textarea>
+
+        <button type="submit">Enviar Avaliação</button>
+
+    </form>
+
+    <div class="contato-box">
+    <h3>Contato</h3>
+    <p>Entre em contato ou acesse meu GitHub:</p>
+
+    <div class="contato-item">
+        <i class="fa-brands fa-github"></i>
+        <div>
+            <strong>GitHub</strong>
+            <a href="https://github.com/Luiz192512" target="_blank">
+                github.com/Luiz192512
+            </a>
+        </div>
+    </div>
+
+    <div class="contato-item">
+        <i class="fa-solid fa-envelope"></i>
+        <div>
+            <strong>Email</strong>
+            <a href="mailto:enz.luizgustavo@gmail.com">
+                enz.luizgustavo@gmail.com
+            </a>
+        </div>
+    </div>
+</div>
+
+</section>
+
+<footer>
+    <p>Material de Estudo Digital - Java</p>
+</footer>
+
+</body>
+</html>
