@@ -16,8 +16,9 @@ Repositório de atividades do 3º semestre com páginas estáticas (HTML/CSS) pu
 - Site principal (hub): https://luiz192512.github.io/FrontEnd/
 - Atividade 1 — Colecionador de relógios: https://luiz192512.github.io/FrontEnd/site-colecionador/
 - Atividade 2 — Aprendizagem Java: https://luiz192512.github.io/FrontEnd/site-aprendizagem/
-- Atividade 3 — Prática de CSS: https://luiz192512.github.io/FrontEnd/site-atividade-css/
-- Atividade 4 — DaisyUI: https://luiz192512.github.io/FrontEnd/site-atividade-daisyui/
+- Atividade 3 — Prática de CSS: https://luiz192512.github.io/FrontEnd/site-css/
+- Atividade 4 — DaisyUI: https://luiz192512.github.io/FrontEnd/site-daisyui/
+- Atividade 5 - Bootstrap: https://luiz192512.github.io/FrontEnd/site-boostrap/
 
 ## Site (GitHub Pages)
 O projeto está publicado via GitHub Pages.
@@ -45,11 +46,14 @@ Este repositório funciona como um “hub” de atividades:
   - `index.html`: conteúdo do site.
   - `css/style.css`: estilos do site.
 
-- `site-atividade-css/` (Atividade 3): página de prática com HTML/CSS (tema: curiosidades e fatos da Computação).
+- `site-css/` (Atividade 3): página de prática com HTML/CSS (tema: curiosidades e fatos da Computação).
   - `index.html`: conteúdo do site.
   - `css/style.css`: estilos do site.
 
-- `site-atividade-daisyui/` (Atividade 4): variação do site da Atividade 3 utilizando DaisyUI (via CDN).
+- `site-daisyui/` (Atividade 4): variação do site da Atividade 3 utilizando DaisyUI (via CDN).
+  - `index.html`: conteúdo do site.
+
+- `site-boostrap/` (Atividade 5): variação do site da Atividade 3 utilizando Bootstrap.
   - `index.html`: conteúdo do site.
 
 ## Como executar localmente
