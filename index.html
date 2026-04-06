@@ -3,114 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meus Projetos</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #1e1e2f, #2b5876);
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        h1 {
-            margin-bottom: 40px;
-            font-size: 2.5rem;
-        }
-
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            width: 100%;
-            max-width: 900px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            transition: 0.3s;
-            cursor: pointer;
-            text-decoration: none;
-            color: white;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .card h2 {
-            margin-bottom: 10px;
-        }
-
-        .card p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        footer {
-            margin-top: 40px;
-            font-size: 0.8rem;
-            opacity: 0.7;
-        }
-    </style>
+    <title>Hub de Projetos FrontEnd</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+    <div class="page">
+        <header class="hero">
+            <span class="eyebrow">Hub principal do repositório</span>
+            <h1>Projetos de FrontEnd em um só lugar</h1>
+            <p>
+                Este hub reúne as atividades do semestre, os experimentos com frameworks CSS e os projetos
+                interativos em JavaScript. A ideia é facilitar a navegação, deixar a estrutura mais clara e
+                mostrar o que já está pronto, incluindo as três versões da atividade Arquivo Confuso:
+                CSS puro, DaisyUI e Bootstrap.
+            </p>
 
-    <h1>Meus Projetos</h1>
+            <div class="hero-actions">
+                <a class="button" href="#projetos">Explorar projetos</a>
+                <a class="button-secondary" href="./README.md">Ler documentação</a>
+            </div>
 
-    <div class="container">
+            <div class="stats" aria-label="Resumo do repositório">
+                <div class="stat">
+                    <strong>7</strong>
+                    <span>projetos navegáveis</span>
+                </div>
+                <div class="stat">
+                    <strong>2</strong>
+                    <span>atividades registradas</span>
+                </div>
+                <div class="stat">
+                    <strong>HTML</strong>
+                    <span>base principal do repositório</span>
+                </div>
+                <div class="stat">
+                    <strong>CSS + JS</strong>
+                    <span>estilos, interações e miniapps</span>
+                </div>
+            </div>
+        </header>
 
-        <a href="https://luiz192512.github.io/FrontEnd/site-colecionador/" class="card">
-            <h2>Site de Colecionador de Relógios</h2>
-            <p>Atividade 1</p>
-        </a>
+        <section class="section" id="projetos">
+            <div class="section-head">
+                <div>
+                    <h2>Projetos disponíveis</h2>
+                    <p>
+                        Cards com acesso direto aos sites que já possuem `index.html` funcional e podem ser
+                        abertos localmente ou pelo GitHub Pages.
+                    </p>
+                </div>
+            </div>
 
-        <a href="https://luiz192512.github.io/FrontEnd/site-aprendizagem/" class="card">
-            <h2>Site de Aprendizagem Java</h2>
-            <p>Atividade 2</p>
-        </a>
+            <div class="projects-grid">
+                <a class="project-card" href="./site-colecionador/">
+                    <div class="project-top">
+                        <div class="icon">01</div>
+                    <span class="badge">Disponivel</span>
+                    </div>
+                    <h3>Coleção de Relógios</h3>
+                    <p>Galeria estática com foco em apresentação visual de relógios, imagens e organização de layout.</p>
+                    <div class="meta">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>Galeria</span>
+                    </div>
+                    <span class="project-link">Abrir projeto →</span>
+                </a>
 
-        <a href="https://luiz192512.github.io/FrontEnd/site-css/" class="card">
-            <h2>Site para Codificar o CSS</h2>
-            <p>Atividade 3</p>
-        </a>
+                <a class="project-card" href="./site-aprendizagem/">
+                    <div class="project-top">
+                        <div class="icon">02</div>
+                    <span class="badge">Disponivel</span>
+                    </div>
+                    <h3>Material de Estudo Java</h3>
+                    <p>Página de estudo com navegação por seções, conteúdo didático, formulário e organização acadêmica.</p>
+                    <div class="meta">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>Conteúdo</span>
+                    </div>
+                    <span class="project-link">Abrir projeto →</span>
+                </a>
 
-        <a href="https://luiz192512.github.io/FrontEnd/site-daisyui/" class="card">
-            <h2>Site Aprendendo a Utilizar o DaisyUI</h2>
-            <p>Atividade 4</p>
-        </a>
+                <a class="project-card" href="./site-css/">
+                    <div class="project-top">
+                        <div class="icon">03</div>
+                    <span class="badge">Disponivel</span>
+                    </div>
+                    <h3>Arquivo Confuso da Computação</h3>
+                    <p>Versão da atividade sem framework, com HTML estruturado e CSS separado na própria pasta do projeto.</p>
+                    <div class="meta">
+                        <span>HTML</span>
+                        <span>CSS puro</span>
+                        <span>Curiosidades</span>
+                    </div>
+                    <span class="project-link">Abrir projeto →</span>
+                </a>
 
-        <a href="https://luiz192512.github.io/FrontEnd/site-bootstrap/" class="card">
-            <h2>Site Aprendendo a Utilizar o Bootstrap5</h2>
-            <p>Atividade 5</p>
-        </a>
+                <a class="project-card" href="./site-daisyui/">
+                    <div class="project-top">
+                        <div class="icon">04</div>
+                    <span class="badge">Disponivel</span>
+                    </div>
+                    <h3>Arquivo Confuso com DaisyUI</h3>
+                    <p>Versão equivalente à atividade em Bootstrap, adaptada para DaisyUI com componentes, tema e utilitários do framework.</p>
+                    <div class="meta">
+                        <span>DaisyUI</span>
+                        <span>CDN</span>
+                        <span>Componentes</span>
+                    </div>
+                    <span class="project-link">Abrir projeto →</span>
+                </a>
 
-        <a href="https://luiz192512.github.io/FrontEnd/site-caixa-livre/" class="card">
-            <h2>Site para Criação de Caixas de Texto Usando JavaScript</h2>
-            <p>Atividade 6</p>
-        </a>
+                <a class="project-card" href="./site-bootstrap/">
+                    <div class="project-top">
+                        <div class="icon">05</div>
+                    <span class="badge">Disponivel</span>
+                    </div>
+                    <h3>Arquivo Confuso com Bootstrap</h3>
+                    <p>Versão de referência da atividade, usando grid, utilitários e componentes prontos do Bootstrap.</p>
+                    <div class="meta">
+                        <span>Bootstrap</span>
+                        <span>CDN</span>
+                        <span>Layout responsivo</span>
+                    </div>
+                    <span class="project-link">Abrir projeto →</span>
+                </a>
 
+                <a class="project-card" href="./site-caixa-livre/">
+                    <div class="project-top">
+                        <div class="icon">06</div>
+                    <span class="badge">Disponivel</span>
+                    </div>
+                    <h3>Caixa Livre</h3>
+                    <p>Miniaplicação com JavaScript para montar compras, somar subtotais, atualizar o total e tocar efeitos sonoros.</p>
+                    <div class="meta">
+                        <span>JavaScript</span>
+                        <span>Bootstrap</span>
+                        <span>Interativo</span>
+                    </div>
+                    <span class="project-link">Abrir projeto →</span>
+                </a>
+
+                <a class="project-card" href="./site-bichinho/">
+                    <div class="project-top">
+                        <div class="icon">07</div>
+                    <span class="badge">Disponivel</span>
+                    </div>
+                    <h3>Meu Tamagotchi Virtual</h3>
+                    <p>Projeto interativo com estados visuais, temporizador, reinício, áudio e easter egg escondido.</p>
+                    <div class="meta">
+                        <span>JavaScript</span>
+                        <span>CSS temático</span>
+                        <span>Game loop</span>
+                    </div>
+                    <span class="project-link">Abrir projeto →</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="section" id="estrutura">
+            <div class="section-head">
+                <div>
+                    <h2>Estrutura complementar</h2>
+                    <p>
+                        Estas atividades tambem fazem parte da estrutura principal do repositório.
+                        No estado atual, elas aparecem como pastas auxiliares registradas na árvore do projeto.
+                    </p>
+                </div>
+            </div>
+
+            <div class="projects-grid">
+                <article class="project-card placeholder">
+                    <div class="project-top">
+                        <div class="icon">08</div>
+                        <span class="badge pending">Atividade</span>
+                    </div>
+                    <h3>site-atividade-css</h3>
+                    <p>Pasta auxiliar registrada no repositório, separada do projeto principal <code>site-css</code>.</p>
+                    <div class="meta">
+                        <span>Atividade</span>
+                        <span>CSS</span>
+                    </div>
+                    <span class="project-link">Estrutura registrada no hub</span>
+                </article>
+
+                <article class="project-card placeholder">
+                    <div class="project-top">
+                        <div class="icon">09</div>
+                        <span class="badge pending">Atividade</span>
+                    </div>
+                    <h3>site-atividade-daisyui</h3>
+                    <p>Pasta auxiliar registrada no repositório, separada do projeto principal <code>site-daisyui</code>.</p>
+                    <div class="meta">
+                        <span>Atividade</span>
+                        <span>DaisyUI</span>
+                    </div>
+                    <span class="project-link">Estrutura registrada no hub</span>
+                </article>
+            </div>
+        </section>
+
+        <footer>
+            Luiz Gustavo Lorençone Enz · 2026 · Hub reorganizado para refletir toda a estrutura do repositório
+        </footer>
     </div>
-
-    <footer>
-        © 2026 - Luiz Gustavo Lorençone Enz
-    </footer>
-
 </body>
 </html>
