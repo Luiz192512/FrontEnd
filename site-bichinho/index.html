@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Tamagotchi Virtual</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main class="app">
+        <section class="toy-shell" aria-label="Tamagotchi virtual">
+            <div class="toy-top">
+                <p class="eyebrow">Bichinho virtual</p>
+                <h1>Cuide bem do seu companheiro</h1>
+                <p class="description">Alimente antes que ele fique bravo. Se demorar demais, ele morre.</p>
+            </div>
+
+            <div class="screen">
+                <div class="screen-inner">
+                    <div class="pet-stage">
+                        <img id="b" src="img/b_n.png" alt="Bichinho virtual em estado normal">
+                    </div>
+
+                    <div class="status-board" aria-live="polite">
+                        <p class="status-label">Status</p>
+                        <p id="status-text">Seu bichinho acabou de acordar e esta feliz.</p>
+                        <p id="timer-text">Bravo em: 15.0s | Morte em: 30.0s</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button id="feed-btn" class="feed-button" type="button" aria-label="Alimentar o bichinho">
+                    <img id="btn" src="img/btn.png" alt="">
+                    <span>Dar comida</span>
+                </button>
+                <button id="restart-btn" class="secondary-button" type="button" hidden>Recomecar</button>
+            </div>
+        </section>
+    </main>
+
+    <button id="gostosinho-btn" class="egg-button" type="button" aria-label="Ativar easter egg"></button>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
