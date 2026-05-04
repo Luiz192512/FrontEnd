@@ -314,6 +314,13 @@ button {
     margin: 6px 0;
 }
 
+header h1 {
+    color: var(--bg);
+    margin: 0;
+    font-size: clamp(1.5rem, 4vw, 3rem);
+
+}
+
 @media (max-width: 720px) {
     .page {
         width: min(100% - 18px, 1100px);
