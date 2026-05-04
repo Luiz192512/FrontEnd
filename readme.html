@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação - Hub de Projetos FrontEnd</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        .doc-content {
+            max-width: 800px;
+        }
+
+        .doc-content h2 {
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-size: 1.8rem;
+            color: var(--accent);
+            border-bottom: 2px solid var(--line);
+            padding-bottom: 12px;
+        }
+
+        .doc-content h3 {
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+            color: var(--accent-2);
+        }
+
+        .doc-content p {
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+
+        .doc-content ul,
+        .doc-content ol {
+            margin: 16px 0 16px 24px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .doc-content li {
+            margin-bottom: 8px;
+        }
+
+        .doc-content code {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 2px 6px;
+            color: var(--accent);
+            font-family: "Courier New", monospace;
+            font-size: 0.9rem;
+        }
+
+        .doc-content pre {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+
+        .doc-content pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: var(--accent);
+        }
+
+        .project-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 18px;
+            margin: 14px 0;
+        }
+
+        .project-item h4 {
+            color: var(--success);
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        .project-item p {
+            margin-bottom: 8px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            color: var(--accent);
+            font-weight: 600;
+            transition: gap 0.2s ease;
+        }
+
+        .back-link:hover {
+            gap: 12px;
+        }
+
+        .badge-doc {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 6px;
+        }
+
+        .badge-html {
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+            border: 1px solid rgba(255, 107, 107, 0.3);
+        }
+
+        .badge-css {
+            background: rgba(102, 153, 255, 0.2);
+            color: #6699ff;
+            border: 1px solid rgba(102, 153, 255, 0.3);
+        }
+
+        .badge-js {
+            background: rgba(255, 209, 102, 0.2);
+            color: #ffd166;
+            border: 1px solid rgba(255, 209, 102, 0.3);
+        }
+
+        .badge-framework {
+            background: rgba(118, 228, 247, 0.2);
+            color: #76e4f7;
+            border: 1px solid rgba(118, 228, 247, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <a href="./" class="back-link">← Voltar ao Hub</a>
+
+        <header class="hero">
+            <span class="eyebrow">Documentação</span>
+            <h1>Repositório FrontEnd</h1>
+            <p>
+                Atividades e experimentos do 3º semestre de Engenharia de Software. 
+                Este hub reúne uma coleção de páginas estáticas, versões framework-específicas de atividades 
+                e projetos interativos com JavaScript.
+            </p>
+        </header>
+
+        <section class="section">
+            <div class="doc-content">
+                <h2>📋 Visão Geral</h2>
+                <p>
+                    O projeto está organizado como uma coleção de páginas estáticas e miniaplicações front-end:
+                </p>
+                <ul>
+                    <li>Páginas em HTML e CSS puro</li>
+                    <li>Versões de uma mesma atividade usando CSS puro, DaisyUI e Bootstrap</li>
+                    <li>Projetos com JavaScript para interação, áudio e atualização dinâmica</li>
+                    <li>Um hub principal na raiz para centralizar a navegação</li>
+                </ul>
+
+                <h2>📁 Estrutura do Repositório</h2>
+                <pre><code>FrontEnd/
+├── css/
+│   └── style.css          (estilos globais do hub)
+├── index.html             (hub principal)
+├── readme.html            (esta documentação)
+├── README.md              (arquivo markdown original)
+│
+├── 1-bi/                  (Primeiro bimestre)
+│   ├── site-aprendizagem/
+│   ├── site-atividade-css/
+│   ├── site-atividade-daisyui/
+│   ├── site-bichinho/
+│   ├── site-bootstrap/
+│   ├── site-caixa-livre/
+│   ├── site-colecionador/
+│   ├── site-css/
+│   └── site-daisyui/
+│
+└── 2-bi/                  (Segundo bimestre)
+    └── [projetos futuros]</code></pre>
+
+                <h2>🎯 Projetos do 1º Bimestre</h2>
+
+                <div class="project-item">
+                    <h4><span class="badge-doc badge-html">HTML</span><span class="badge-doc badge-css">CSS</span> Site Colecionador</h4>
+                    <p>
+                        Galeria estática com uma coleção de relógios, imagens e organização visual simples.
+                        Foco em apresentação visual e estrutura de layout.
+                    </p>
+                    <p><strong>Caminho:</strong> <code>1-bi/site-colecionador/</code></p>
+                    <p><strong>Arquivos principais:</strong></p>
+                    <ul>
+                        <li><code>index.html</code></li>
+                        <li><code>css/style.css</code></li>
+                        <li><code>img/</code> (imagens dos relógios)</li>
+                    </ul>
+                </div>
+
+                <div class="project-item">
+                    <h4><span class="badge-doc badge-html">HTML</span><span class="badge-doc badge-css">CSS</span> Material de Estudo Java</h4>
+                    <p>
+                        Material de estudo digital com foco em Java, seções temáticas, navegação interna e formulário.
+                        Exemplo de página educacional bem estruturada.
+                    </p>
+                    <p><strong>Caminho:</strong> <code>1-bi/site-aprendizagem/</code></p>
+                    <p><strong>Arquivos principais:</strong></p>
+                    <ul>
+                        <li><code>index.html</code></li>
+                        <li><code>css/style.css</code></li>
+                    </ul>
+                </div>
+
+                <div class="project-item">
+                    <h4><span class="badge-doc badge-html">HTML</span><span class="badge-doc badge-css">CSS Puro</span> Arquivo Confuso (CSS Puro)</h4>
+                    <p>
+                        Versão base da atividade "Arquivo Confuso da Computação" sem frameworks. 
+                        Demonstra estruturação semântica com CSS próprio.
+                    </p>
+                    <p><strong>Caminho:</strong> <code>1-bi/site-css/</code></p>
+                    <p><strong>Arquivos principais:</strong></p>
+                    <ul>
+                        <li><code>index.html</code></li>
+                        <li><code>css/style.css</code></li>
+                    </ul>
+                </div>
+
+                <div class="project-item">
+                    <h4><span class="badge-doc badge-framework">DaisyUI</span> Arquivo Confuso (DaisyUI)</h4>
+                    <p>
+                        Versão equivalente à atividade em Bootstrap, adaptada para DaisyUI com componentes, 
+                        tema e utilitários do framework Tailwind + DaisyUI.
+                    </p>
+                    <p><strong>Caminho:</strong> <code>1-bi/site-daisyui/</code></p>
+                    <p><strong>Características:</strong></p>
+                    <ul>
+                        <li>Framework: DaisyUI com Tailwind CSS</li>
+                        <li>CDN baseado</li>
+                        <li>Sistema de componentes reutilizáveis</li>
+                    </ul>
+                </div>
+
+                <div class="project-item">
+                    <h4><span class="badge-doc badge-framework">Bootstrap</span> Arquivo Confuso (Bootstrap)</h4>
+                    <p>
+                        Versão de referência da atividade utilizando grid, utilitários e componentes 
+                        prontos do Bootstrap. Demonstra uso profissional de framework CSS.
+                    </p>
+                    <p><strong>Caminho:</strong> <code>1-bi/site-bootstrap/</code></p>
+                    <p><strong>Características:</strong></p>
+                    <ul>
+                        <li>Framework: Bootstrap 5</li>
+                        <li>CDN baseado</li>
+                        <li>Layout responsivo com grid system</li>
+                    </ul>
+                </div>
+
+                <div class="project-item">
+                    <h4><span class="badge-doc badge-js">JavaScript</span> Caixa Livre</h4>
+                    <p>
+                        Miniaplicação com JavaScript para montar compras, somar subtotais, atualizar o total 
+                        e tocar efeitos sonoros. Primeira experiência com manipulação de DOM e estado.
+                    </p>
+                    <p><strong>Caminho:</strong> <code>1-bi/site-caixa-livre/</code></p>
+                    <p><strong>Funcionalidades:</strong></p>
+                    <ul>
+                        <li>Adição dinâmica de itens</li>
+                        <li>Cálculo de subtotais e total</li>
+                        <li>Efeitos sonoros (áudio)</li>
+                        <li>Interface Bootstrap</li>
+                    </ul>
+                </div>
+
+                <div class="project-item">
+                    <h4><span class="badge-doc badge-js">JavaScript</span><span class="badge-doc badge-css">CSS Temático</span> Meu Tamagotchi Virtual</h4>
+                    <p>
+                        Projeto interativo com estados visuais, temporizador, reinício, áudio e easter egg escondido. 
+                        Demonstra game loop e gestão de estados com JavaScript.
+                    </p>
+                    <p><strong>Caminho:</strong> <code>1-bi/site-bichinho/</code></p>
+                    <p><strong>Funcionalidades:</strong></p>
+                    <ul>
+                        <li>Estados do personagem (feliz, cansado, com fome)</li>
+                        <li>Temporizador e sistema de decaimento</li>
+                        <li>Áudio para interações</li>
+                        <li>Easter egg escondido</li>
+                        <li>Reinício de jogo</li>
+                    </ul>
+                </div>
+
+                <h2>📝 Atividades Auxiliares</h2>
+
+                <div class="project-item">
+                    <h4><span class="badge-doc badge-css">CSS</span> site-atividade-css</h4>
+                    <p>Pasta auxiliar registrada no repositório, separada do projeto principal <code>site-css</code>.</p>
+                </div>
+
+                <div class="project-item">
+                    <h4><span class="badge-doc badge-framework">DaisyUI</span> site-atividade-daisyui</h4>
+                    <p>Pasta auxiliar registrada no repositório, separada do projeto principal <code>site-daisyui</code>.</p>
+                </div>
+
+                <h2>🚀 Como Usar</h2>
+                <ol>
+                    <li>Clone ou baixe o repositório</li>
+                    <li>Abra o arquivo <code>index.html</code> no navegador para acessar o hub</li>
+                    <li>Navegue pelos projetos através dos cards na página principal</li>
+                    <li>Cada projeto possui um <code>index.html</code> próprio na sua pasta</li>
+                    <li>Use a opção "Voltar ao Hub" para retornar à página principal</li>
+                </ol>
+
+                <h2>💡 Tecnologias Utilizadas</h2>
+                <ul>
+                    <li><strong>HTML5:</strong> Semântica e estruturação</li>
+                    <li><strong>CSS3:</strong> Estilos, animações e layouts responsivos</li>
+                    <li><strong>CSS Frameworks:</strong> Bootstrap, DaisyUI, Tailwind</li>
+                    <li><strong>JavaScript (ES6+):</strong> Interatividade e manipulação de DOM</li>
+                    <li><strong>Web APIs:</strong> Audio, LocalStorage, etc.</li>
+                </ul>
+
+                <h2>📚 Recursos de Aprendizado</h2>
+                <p>Este repositório serve como portfólio de desenvolvimento front-end, cobrindo:</p>
+                <ul>
+                    <li>Prototipagem rápida com HTML e CSS</li>
+                    <li>Design responsivo e mobile-first</li>
+                    <li>Uso de frameworks CSS modernos</li>
+                    <li>Programação orientada a eventos com JavaScript</li>
+                    <li>Gestão de estado e manipulação de DOM</li>
+                    <li>Integração de áudio e recursos multimídia</li>
+                </ul>
+
+                <h2>✨ Destaques</h2>
+                <ul>
+                    <li>Design consistente com tema escuro e gradientes modernos</li>
+                    <li>Navegação unificada através do hub principal</li>
+                    <li>Projetos variados que cobrem diferentes aspectos do front-end</li>
+                    <li>Código bem estruturado e comentado</li>
+                    <li>Responsivo e otimizado para diferentes tamanhos de tela</li>
+                </ul>
+
+                <h2>👨‍💼 Sobre</h2>
+                <p>
+                    <strong>Autor:</strong> Luiz Gustavo Lorençone Enz<br>
+                    <strong>Período:</strong> 3º Semestre de Engenharia de Software<br>
+                    <strong>Ano:</strong> 2026<br>
+                    <strong>Descrição:</strong> Hub reorganizado para refletir toda a estrutura do repositório, 
+                    facilitando navegação e apresentando de forma visual todos os projetos desenvolvidos.
+                </p>
+            </div>
+        </section>
+
+        <footer>
+            Luiz Gustavo Lorençone Enz · 2026 · Documentação do Hub de Projetos FrontEnd
+        </footer>
+    </div>
+</body>
+</html>
