@@ -23,15 +23,31 @@ body, html {
     border-radius: 15px;
     overflow: hidden;
     margin: 10px;
+    width: 352px !important;
+    height: 559.8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-img-wrapper {
+    width: 352px;
+    height: 352px;
+    overflow: hidden;
+    display: block;
+    align-items: center;
+    justify-content: center;
 }
 
 .card-img-top {
     width: 352px;
     height: auto;
+    display: block;
+    max-height: 352px;
 }
 
 .card-body {
     padding: 20px;
+    margin-top: auto;
 }
 
 .card-title {
