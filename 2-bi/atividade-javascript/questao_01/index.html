@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questão 01 - Validador de CPF</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #e67e22;
+            --bg: #f0f2f5;
+            --card: #ffffff;
+            --ok: #16803c;
+            --erro: #c0392b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            background: var(--bg);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: #333333;
+        }
+
+        .card {
+            width: min(100%, 540px);
+            background: var(--card);
+            border-radius: 8px;
+            border-top: 5px solid var(--accent);
+            padding: 28px;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            color: var(--primary);
+            font-size: 1.6rem;
+        }
+
+        p {
+            margin: 0 0 20px;
+            color: #555555;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cfd7df;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        button,
+        a {
+            display: inline-block;
+            border: 0;
+            border-radius: 6px;
+            padding: 11px 16px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        button {
+            background: var(--accent);
+            color: #ffffff;
+        }
+
+        a {
+            background: #e8edf2;
+            color: var(--primary);
+        }
+
+        .resultado {
+            display: none;
+            margin-top: 20px;
+            padding: 14px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .resultado.valido {
+            display: block;
+            background: #eafaf0;
+            color: var(--ok);
+            border: 1px solid #b9e7c7;
+        }
+
+        .resultado.invalido {
+            display: block;
+            background: #fdecea;
+            color: var(--erro);
+            border: 1px solid #f3c2bd;
+        }
+    </style>
+</head>
+<body>
+    <main class="card">
+        <h1>Validador de CPF</h1>
+        <p>Digite um CPF com ou sem pontos e traço para verificar os dígitos validadores.</p>
+
+        <label for="cpf">CPF</label>
+        <input id="cpf" type="text" maxlength="14" placeholder="Ex.: 529.982.247-25">
+
+        <div class="actions">
+            <button type="button" id="validar">Validar</button>
+            <a href="../index.html">Voltar ao hub</a>
+        </div>
+
+        <div id="resultado" class="resultado" aria-live="polite"></div>
+    </main>
+
+    <script>
+        const cpfInput = document.getElementById("cpf");
+        const resultado = document.getElementById("resultado");
+        const validarBtn = document.getElementById("validar");
+
+        function calcularDigito(cpfParcial, pesoInicial) {
+            let soma = 0;
+
+            for (let i = 0; i < cpfParcial.length; i++) {
+                soma += Number(cpfParcial[i]) * (pesoInicial - i);
+            }
+
+            const resto = (soma * 10) % 11;
+            return resto === 10 ? 0 : resto;
+        }
+
+        function cpfValido(cpf) {
+            const numeros = cpf.replace(/\D/g, "");
+
+            if (numeros.length !== 11 || /^(\d)\1{10}$/.test(numeros)) {
+                return false;
+            }
+
+            const primeiroDigito = calcularDigito(numeros.slice(0, 9), 10);
+            const segundoDigito = calcularDigito(numeros.slice(0, 10), 11);
+
+            return primeiroDigito === Number(numeros[9]) && segundoDigito === Number(numeros[10]);
+        }
+
+        validarBtn.addEventListener("click", () => {
+            const cpf = cpfInput.value;
+            const valido = cpfValido(cpf);
+
+            resultado.className = `resultado ${valido ? "valido" : "invalido"}`;
+            resultado.textContent = valido ? "CPF válido." : "CPF inválido.";
+        });
+    </script>
+</body>
+</html>

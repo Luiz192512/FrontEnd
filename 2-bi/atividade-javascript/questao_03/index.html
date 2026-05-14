@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questão 03 - Média Escolar</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #e67e22;
+            --bg: #f0f2f5;
+            --card: #ffffff;
+            --blue: #1f6feb;
+            --green: #16803c;
+            --red: #c0392b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            background: var(--bg);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: #333333;
+        }
+
+        .card {
+            width: min(100%, 680px);
+            background: var(--card);
+            border-radius: 8px;
+            border-top: 5px solid var(--accent);
+            padding: 28px;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            color: var(--primary);
+            font-size: 1.6rem;
+        }
+
+        p {
+            margin: 0 0 22px;
+            color: #555555;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 14px;
+        }
+
+        .nome {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cfd7df;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        button,
+        a {
+            display: inline-block;
+            border: 0;
+            border-radius: 6px;
+            padding: 11px 16px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        button {
+            background: var(--accent);
+            color: #ffffff;
+        }
+
+        a {
+            background: #e8edf2;
+            color: var(--primary);
+        }
+
+        .resultado {
+            display: none;
+            margin-top: 20px;
+            padding: 14px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .azul {
+            display: block;
+            background: #eaf2ff;
+            color: var(--blue);
+            border: 1px solid #b9d3ff;
+        }
+
+        .verde {
+            display: block;
+            background: #eafaf0;
+            color: var(--green);
+            border: 1px solid #b9e7c7;
+        }
+
+        .vermelho {
+            display: block;
+            background: #fdecea;
+            color: var(--red);
+            border: 1px solid #f3c2bd;
+        }
+    </style>
+</head>
+<body>
+    <main class="card">
+        <h1>Média Escolar</h1>
+        <p>Informe o nome do aluno e três notas para calcular a média e a situação final.</p>
+
+        <div class="grid">
+            <div class="nome">
+                <label for="aluno">Nome do aluno</label>
+                <input id="aluno" type="text" placeholder="Ex.: Ana Silva">
+            </div>
+
+            <div>
+                <label for="nota1">Nota 1</label>
+                <input id="nota1" type="number" min="0" max="10" step="0.1">
+            </div>
+
+            <div>
+                <label for="nota2">Nota 2</label>
+                <input id="nota2" type="number" min="0" max="10" step="0.1">
+            </div>
+
+            <div>
+                <label for="nota3">Nota 3</label>
+                <input id="nota3" type="number" min="0" max="10" step="0.1">
+            </div>
+        </div>
+
+        <div class="actions">
+            <button type="button" id="calcular">Calcular média</button>
+            <a href="../index.html">Voltar ao hub</a>
+        </div>
+
+        <div id="resultado" class="resultado" aria-live="polite"></div>
+    </main>
+
+    <script>
+        const aluno = document.getElementById("aluno");
+        const nota1 = document.getElementById("nota1");
+        const nota2 = document.getElementById("nota2");
+        const nota3 = document.getElementById("nota3");
+        const resultado = document.getElementById("resultado");
+
+        function notaValida(valor) {
+            return Number.isFinite(valor) && valor >= 0 && valor <= 10;
+        }
+
+        document.getElementById("calcular").addEventListener("click", () => {
+            const nome = aluno.value.trim() || "Aluno";
+            const notas = [Number(nota1.value), Number(nota2.value), Number(nota3.value)];
+
+            if (!notas.every(notaValida)) {
+                resultado.className = "resultado vermelho";
+                resultado.textContent = "Preencha as três notas com valores entre 0 e 10.";
+                return;
+            }
+
+            const media = notas.reduce((soma, nota) => soma + nota, 0) / notas.length;
+
+            if (media >= 7) {
+                resultado.className = "resultado azul";
+                resultado.textContent = `${nome} foi aprovado. Média: ${media.toFixed(2)}.`;
+            } else if (media >= 4) {
+                const faltaParaDez = 10 - media;
+                resultado.className = "resultado verde";
+                resultado.textContent = `${nome} está em exame. Média: ${media.toFixed(2)}. Faltam ${faltaParaDez.toFixed(2)} pontos para chegar a 10.`;
+            } else {
+                resultado.className = "resultado vermelho";
+                resultado.textContent = `${nome} foi reprovado. Média: ${media.toFixed(2)}.`;
+            }
+        });
+    </script>
+</body>
+</html>

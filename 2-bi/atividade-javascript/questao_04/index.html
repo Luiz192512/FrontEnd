@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questão 04 - Taxas Infinity Bank</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #e67e22;
+            --bg: #f0f2f5;
+            --card: #ffffff;
+            --line: #dce3ea;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            background: var(--bg);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: #333333;
+        }
+
+        .card {
+            width: min(100%, 760px);
+            background: var(--card);
+            border-radius: 8px;
+            border-top: 5px solid var(--accent);
+            padding: 28px;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            color: var(--primary);
+            font-size: 1.6rem;
+        }
+
+        p {
+            margin: 0 0 22px;
+            color: #555555;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 14px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cfd7df;
+            border-radius: 6px;
+            font-size: 1rem;
+            background: #ffffff;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        button,
+        a {
+            display: inline-block;
+            border: 0;
+            border-radius: 6px;
+            padding: 11px 16px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        button {
+            background: var(--accent);
+            color: #ffffff;
+        }
+
+        a {
+            background: #e8edf2;
+            color: var(--primary);
+        }
+
+        .resultado {
+            display: none;
+            margin-top: 22px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .resultado.ativo {
+            display: block;
+        }
+
+        .linha {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .linha:last-child {
+            border-bottom: 0;
+            background: #fff7ed;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .erro {
+            display: none;
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: 6px;
+            background: #fdecea;
+            color: #c0392b;
+            border: 1px solid #f3c2bd;
+            font-weight: 700;
+        }
+
+        .erro.ativo {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <main class="card">
+        <h1>Taxas Infinity Bank</h1>
+        <p>Escolha a bandeira, informe o valor da venda e a quantidade de parcelas.</p>
+
+        <div class="grid">
+            <div>
+                <label for="bandeira">Bandeira</label>
+                <select id="bandeira">
+                    <option value="visa">Visa - 2%</option>
+                    <option value="master">Master - 1,85%</option>
+                    <option value="elo">Elo - 3%</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="valor">Valor da venda</label>
+                <input id="valor" type="number" min="0" step="0.01" placeholder="Ex.: 500">
+            </div>
+
+            <div>
+                <label for="parcelas">Parcelas</label>
+                <input id="parcelas" type="number" min="1" max="24" step="1" value="1">
+            </div>
+        </div>
+
+        <div class="actions">
+            <button type="button" id="calcular">Calcular venda</button>
+            <a href="../index.html">Voltar ao hub</a>
+        </div>
+
+        <div id="erro" class="erro" aria-live="polite"></div>
+        <section id="resultado" class="resultado" aria-live="polite"></section>
+    </main>
+
+    <script>
+        const bandeira = document.getElementById("bandeira");
+        const valor = document.getElementById("valor");
+        const parcelas = document.getElementById("parcelas");
+        const erro = document.getElementById("erro");
+        const resultado = document.getElementById("resultado");
+        const taxaJurosMes = 0.0035;
+        const taxaMensal = 12.50;
+
+        function formatarMoeda(numero) {
+            return numero.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            });
+        }
+
+        function obterTaxaBandeira(nomeBandeira) {
+            switch (nomeBandeira) {
+                case "visa":
+                    return 0.02;
+                case "master":
+                    return 0.0185;
+                case "elo":
+                    return 0.03;
+                default:
+                    return 0;
+            }
+        }
+
+        document.getElementById("calcular").addEventListener("click", () => {
+            const valorVenda = Number(valor.value);
+            const quantidadeParcelas = Number(parcelas.value);
+
+            erro.className = "erro";
+            resultado.className = "resultado";
+
+            if (!Number.isFinite(valorVenda) || valorVenda <= 0 || !Number.isInteger(quantidadeParcelas) || quantidadeParcelas <= 0) {
+                erro.className = "erro ativo";
+                erro.textContent = "Informe um valor de venda maior que zero e uma quantidade válida de parcelas.";
+                return;
+            }
+
+            const percentualBandeira = obterTaxaBandeira(bandeira.value);
+            const valorTaxaBandeira = valorVenda * percentualBandeira;
+            const valorJuros = valorVenda * taxaJurosMes * quantidadeParcelas;
+            const valorTaxaMensal = taxaMensal * quantidadeParcelas;
+            const valorTotal = valorVenda + valorTaxaBandeira + valorJuros + valorTaxaMensal;
+            const valorParcela = valorTotal / quantidadeParcelas;
+
+            resultado.className = "resultado ativo";
+            resultado.innerHTML = `
+                <div class="linha"><span>Valor da venda</span><strong>${formatarMoeda(valorVenda)}</strong></div>
+                <div class="linha"><span>Taxa da bandeira</span><strong>${formatarMoeda(valorTaxaBandeira)}</strong></div>
+                <div class="linha"><span>Juros simples (${quantidadeParcelas} mês(es))</span><strong>${formatarMoeda(valorJuros)}</strong></div>
+                <div class="linha"><span>Taxa mensal</span><strong>${formatarMoeda(valorTaxaMensal)}</strong></div>
+                <div class="linha"><span>Valor de cada parcela</span><strong>${formatarMoeda(valorParcela)}</strong></div>
+                <div class="linha"><span>Total final</span><strong>${formatarMoeda(valorTotal)}</strong></div>
+            `;
+        });
+    </script>
+</body>
+</html>
