@@ -9,6 +9,7 @@ O projeto está organizado como uma coleção de páginas estáticas e miniaplic
 - páginas em HTML e CSS puro;
 - versões de uma mesma atividade usando CSS puro, DaisyUI e Bootstrap;
 - projetos com JavaScript para interação, áudio e atualização dinâmica da interface;
+- desafio de web game com React, inspirado em jogos de palavra como Termo;
 - um hub principal na raiz para centralizar a navegação.
 
 ## Estrutura do repositório
@@ -17,6 +18,9 @@ O projeto está organizado como uma coleção de páginas estáticas e miniaplic
 FrontEnd/
 ├── css/
 │   └── style.css
+├── 2-bi/
+│   └── desafio-react-termo/
+│       └── index.html
 ├── index.html
 ├── README.md
 ├── site-aprendizagem/
@@ -84,6 +88,22 @@ Projeto interativo de bichinho virtual no estilo Tamagotchi, com estados visuais
   `site-bichinho/img/`
   `site-bichinho/audio/`
 
+### 8. desafio-react-termo
+Web game "Letra Certa", um clone estilo Termo desenvolvido com React via CDN. O jogo possui tabuleiro com seis tentativas, teclado virtual, leitura do teclado fisico, sorteio de palavras, reinicio de rodada, estatisticas simples e feedback por cores.
+
+- Arquivo principal:
+  `2-bi/desafio-react-termo/index.html`
+
+- Passo a passo aplicado:
+  1. Criar a estrutura HTML estatica e carregar React, ReactDOM e Babel via CDN.
+  2. Definir a lista de palavras, o tamanho da palavra e a quantidade maxima de tentativas.
+  3. Criar funcoes puras para normalizar entradas, sortear a palavra e comparar cada tentativa.
+  4. Montar o componente principal com `useState` para palavra secreta, tentativas, palavra atual, mensagem e estatisticas.
+  5. Renderizar o tabuleiro com seis linhas e cinco letras por linha.
+  6. Criar o teclado virtual e conectar tambem os eventos do teclado fisico.
+  7. Aplicar classes de resultado para letra correta, letra em posicao errada e letra ausente.
+  8. Adicionar botao de nova palavra, link de volta e card lateral com legenda.
+
 ## Pastas auxiliares registradas na estrutura
 
 Estas pastas também fazem parte do repositório e aparecem no hub principal como parte da organização geral:
@@ -127,6 +147,7 @@ Você pode usar:
 - HTML5
 - CSS3
 - JavaScript
+- React via CDN
 - Bootstrap via CDN
 - DaisyUI via CDN
 - Google Fonts no hub principal
@@ -161,6 +182,8 @@ Links esperados:
   `https://luiz192512.github.io/FrontEnd/site-caixa-livre/`
 - Meu Tamagotchi Virtual:
   `https://luiz192512.github.io/FrontEnd/site-bichinho/`
+- Letra Certa:
+  `https://luiz192512.github.io/FrontEnd/2-bi/desafio-react-termo/`
 
 ## Observações
 

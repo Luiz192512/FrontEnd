@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letra Certa - Desafio React</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        :root {
+            --bg: #111827;
+            --panel: #f8fafc;
+            --ink: #162032;
+            --muted: #5b6472;
+            --line: #d8dee8;
+            --empty: #eef2f7;
+            --correct: #2f9e44;
+            --present: #f08c00;
+            --absent: #6b7280;
+            --accent: #2563eb;
+            --danger: #dc2626;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            background:
+                linear-gradient(rgba(17, 24, 39, 0.82), rgba(17, 24, 39, 0.9)),
+                url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80") center/cover;
+            color: var(--ink);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        .shell {
+            width: min(100%, 1040px);
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 320px;
+            gap: 18px;
+            align-items: stretch;
+        }
+
+        .game,
+        .side {
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            border-radius: 8px;
+            background: rgba(248, 250, 252, 0.96);
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.3);
+        }
+
+        .game {
+            min-height: 680px;
+            padding: 24px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .brand {
+            margin: 0;
+            font-size: clamp(1.8rem, 5vw, 3.2rem);
+            line-height: 1;
+            letter-spacing: 0;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-button,
+        .primary,
+        .ghost {
+            min-height: 42px;
+            border: 0;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .icon-button {
+            width: 42px;
+            background: var(--empty);
+            color: var(--ink);
+        }
+
+        .primary {
+            padding: 0 14px;
+            background: var(--accent);
+            color: #ffffff;
+        }
+
+        .ghost {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 14px;
+            background: var(--empty);
+            color: var(--ink);
+            text-decoration: none;
+        }
+
+        .status {
+            min-height: 44px;
+            display: grid;
+            place-items: center;
+            margin: 18px 0;
+            padding: 10px 14px;
+            border-radius: 8px;
+            background: #eaf2ff;
+            color: #1d4ed8;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .status.error {
+            background: #fee2e2;
+            color: var(--danger);
+        }
+
+        .board {
+            display: grid;
+            grid-template-rows: repeat(6, 1fr);
+            gap: 8px;
+            width: min(100%, 390px);
+            margin: 0 auto;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        .tile {
+            aspect-ratio: 1;
+            display: grid;
+            place-items: center;
+            border: 2px solid var(--line);
+            border-radius: 8px;
+            background: #ffffff;
+            color: var(--ink);
+            font-size: clamp(1.7rem, 7vw, 2.5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .tile.filled {
+            border-color: #9aa7b8;
+        }
+
+        .tile.correct,
+        .tile.present,
+        .tile.absent {
+            color: #ffffff;
+            border-color: transparent;
+        }
+
+        .tile.correct {
+            background: var(--correct);
+        }
+
+        .tile.present {
+            background: var(--present);
+        }
+
+        .tile.absent {
+            background: var(--absent);
+        }
+
+        .keyboard {
+            display: grid;
+            gap: 8px;
+            margin-top: 22px;
+        }
+
+        .key-row {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .key {
+            min-width: 34px;
+            height: 44px;
+            border: 0;
+            border-radius: 6px;
+            background: #dbe3ee;
+            color: var(--ink);
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        .key.wide {
+            min-width: 70px;
+            padding: 0 10px;
+        }
+
+        .key.correct,
+        .key.present,
+        .key.absent {
+            color: #ffffff;
+        }
+
+        .key.correct {
+            background: var(--correct);
+        }
+
+        .key.present {
+            background: var(--present);
+        }
+
+        .key.absent {
+            background: var(--absent);
+        }
+
+        .side {
+            padding: 22px;
+        }
+
+        .side h2 {
+            margin: 0 0 12px;
+            font-size: 1.2rem;
+        }
+
+        .side p {
+            margin: 0 0 14px;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        .legend {
+            display: grid;
+            gap: 10px;
+            margin: 18px 0 20px;
+        }
+
+        .legend-item {
+            display: grid;
+            grid-template-columns: 42px 1fr;
+            gap: 10px;
+            align-items: center;
+            color: var(--muted);
+        }
+
+        .sample {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 6px;
+            color: #ffffff;
+            font-weight: 900;
+        }
+
+        .sample.correct {
+            background: var(--correct);
+        }
+
+        .sample.present {
+            background: var(--present);
+        }
+
+        .sample.absent {
+            background: var(--absent);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .stat {
+            padding: 12px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: #ffffff;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 1.5rem;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: 0.86rem;
+        }
+
+        .hidden-input {
+            position: fixed;
+            left: -999px;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+        }
+
+        @media (max-width: 860px) {
+            .shell {
+                grid-template-columns: 1fr;
+            }
+
+            .game {
+                min-height: auto;
+            }
+        }
+
+        @media (max-width: 520px) {
+            body {
+                padding: 12px;
+            }
+
+            .game,
+            .side {
+                padding: 16px;
+            }
+
+            .topbar {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .key {
+                min-width: 28px;
+                height: 42px;
+                font-size: 0.85rem;
+            }
+
+            .key.wide {
+                min-width: 56px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const WORDS = ["REACT", "TERMO", "CLONE", "DADOS", "FRAME", "LINHA", "SENHA", "BOTAO", "JOGAR", "TELAS"];
+        const WORD_LENGTH = 5;
+        const MAX_TRIES = 6;
+        const KEY_ROWS = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
+
+        function normalizeText(value) {
+            return value
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .replace(/[^A-Z]/gi, "")
+                .toUpperCase()
+                .slice(0, WORD_LENGTH);
+        }
+
+        function pickWord() {
+            return WORDS[Math.floor(Math.random() * WORDS.length)];
+        }
+
+        function scoreGuess(guess, answer) {
+            const result = Array(WORD_LENGTH).fill("absent");
+            const remaining = {};
+
+            for (let index = 0; index < WORD_LENGTH; index += 1) {
+                if (guess[index] === answer[index]) {
+                    result[index] = "correct";
+                } else {
+                    remaining[answer[index]] = (remaining[answer[index]] || 0) + 1;
+                }
+            }
+
+            for (let index = 0; index < WORD_LENGTH; index += 1) {
+                const letter = guess[index];
+                if (result[index] !== "correct" && remaining[letter] > 0) {
+                    result[index] = "present";
+                    remaining[letter] -= 1;
+                }
+            }
+
+            return result;
+        }
+
+        function getKeyStatuses(guesses, answer) {
+            const priority = { absent: 1, present: 2, correct: 3 };
+            const statuses = {};
+
+            guesses.forEach((guess) => {
+                scoreGuess(guess, answer).forEach((status, index) => {
+                    const letter = guess[index];
+                    if (!statuses[letter] || priority[status] > priority[statuses[letter]]) {
+                        statuses[letter] = status;
+                    }
+                });
+            });
+
+            return statuses;
+        }
+
+        function App() {
+            const [answer, setAnswer] = React.useState(pickWord);
+            const [guesses, setGuesses] = React.useState([]);
+            const [current, setCurrent] = React.useState("");
+            const [message, setMessage] = React.useState("Digite uma palavra de 5 letras.");
+            const [isError, setIsError] = React.useState(false);
+            const [wins, setWins] = React.useState(0);
+            const [played, setPlayed] = React.useState(0);
+
+            const gameWon = guesses.includes(answer);
+            const gameOver = gameWon || guesses.length === MAX_TRIES;
+            const keyStatuses = getKeyStatuses(guesses, answer);
+
+            function showMessage(text, error = false) {
+                setMessage(text);
+                setIsError(error);
+            }
+
+            function restart() {
+                setAnswer(pickWord());
+                setGuesses([]);
+                setCurrent("");
+                showMessage("Nova palavra sorteada. Boa partida.");
+            }
+
+            function submitGuess() {
+                if (gameOver) {
+                    showMessage(`A rodada acabou. A palavra era ${answer}.`, true);
+                    return;
+                }
+
+                if (current.length !== WORD_LENGTH) {
+                    showMessage("Complete as 5 letras antes de enviar.", true);
+                    return;
+                }
+
+                const nextGuesses = [...guesses, current];
+                setGuesses(nextGuesses);
+                setCurrent("");
+
+                if (current === answer) {
+                    setWins((value) => value + 1);
+                    setPlayed((value) => value + 1);
+                    showMessage("Acertou. Clique em reiniciar para jogar de novo.");
+                } else if (nextGuesses.length === MAX_TRIES) {
+                    setPlayed((value) => value + 1);
+                    showMessage(`Fim da rodada. A palavra era ${answer}.`, true);
+                } else {
+                    showMessage(`${MAX_TRIES - nextGuesses.length} tentativa(s) restante(s).`);
+                }
+            }
+
+            function pressKey(key) {
+                if (key === "ENTER") {
+                    submitGuess();
+                    return;
+                }
+
+                if (key === "BACKSPACE") {
+                    setCurrent((value) => value.slice(0, -1));
+                    return;
+                }
+
+                if (/^[A-Z]$/.test(key) && current.length < WORD_LENGTH && !gameOver) {
+                    setCurrent((value) => value + key);
+                    showMessage("Digite uma palavra de 5 letras.");
+                }
+            }
+
+            React.useEffect(() => {
+                function handleKeyDown(event) {
+                    const key = event.key === "Enter" ? "ENTER" : event.key === "Backspace" ? "BACKSPACE" : normalizeText(event.key);
+                    pressKey(key);
+                }
+
+                window.addEventListener("keydown", handleKeyDown);
+                return () => window.removeEventListener("keydown", handleKeyDown);
+            }, [current, guesses, answer]);
+
+            const rows = Array.from({ length: MAX_TRIES }, (_, rowIndex) => {
+                const guess = guesses[rowIndex] || (rowIndex === guesses.length ? current : "");
+                const scores = guesses[rowIndex] ? scoreGuess(guess, answer) : [];
+
+                return (
+                    <div className="row" key={rowIndex}>
+                        {Array.from({ length: WORD_LENGTH }, (_, tileIndex) => {
+                            const letter = guess[tileIndex] || "";
+                            const status = scores[tileIndex] || "";
+                            const className = ["tile", letter ? "filled" : "", status].filter(Boolean).join(" ");
+                            return <div className={className} key={tileIndex}>{letter}</div>;
+                        })}
+                    </div>
+                );
+            });
+
+            return (
+                <main className="shell">
+                    <section className="game" aria-label="Jogo Letra Certa">
+                        <div className="topbar">
+                            <h1 className="brand">Letra Certa</h1>
+                            <div className="actions">
+                                <button className="icon-button" type="button" onClick={restart} title="Reiniciar">↻</button>
+                                <a className="ghost" href="../../index.html">Voltar</a>
+                            </div>
+                        </div>
+
+                        <div className={isError ? "status error" : "status"} aria-live="polite">{message}</div>
+                        <div className="board">{rows}</div>
+
+                        <div className="keyboard" aria-label="Teclado virtual">
+                            {KEY_ROWS.map((row, rowIndex) => (
+                                <div className="key-row" key={row}>
+                                    {rowIndex === 2 && (
+                                        <button className="key wide" type="button" onClick={() => pressKey("ENTER")}>ENTER</button>
+                                    )}
+                                    {row.split("").map((letter) => (
+                                        <button
+                                            className={["key", keyStatuses[letter] || ""].filter(Boolean).join(" ")}
+                                            type="button"
+                                            key={letter}
+                                            onClick={() => pressKey(letter)}
+                                        >
+                                            {letter}
+                                        </button>
+                                    ))}
+                                    {rowIndex === 2 && (
+                                        <button className="key wide" type="button" onClick={() => pressKey("BACKSPACE")}>⌫</button>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    <aside className="side">
+                        <h2>Desafio React</h2>
+                        <p>Clone inspirado em jogos de palavra como Termo, feito com componentes, estado e eventos do React.</p>
+
+                        <div className="legend">
+                            <div className="legend-item">
+                                <span className="sample correct">A</span>
+                                <span>Letra certa no lugar certo.</span>
+                            </div>
+                            <div className="legend-item">
+                                <span className="sample present">A</span>
+                                <span>Letra existe, mas esta em outra posicao.</span>
+                            </div>
+                            <div className="legend-item">
+                                <span className="sample absent">A</span>
+                                <span>Letra nao aparece na palavra.</span>
+                            </div>
+                        </div>
+
+                        <button className="primary" type="button" onClick={restart}>Nova palavra</button>
+
+                        <div className="stats-grid">
+                            <div className="stat">
+                                <strong>{played}</strong>
+                                <span>partidas</span>
+                            </div>
+                            <div className="stat">
+                                <strong>{wins}</strong>
+                                <span>vitorias</span>
+                            </div>
+                        </div>
+                    </aside>
+                </main>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+</body>
+</html>
